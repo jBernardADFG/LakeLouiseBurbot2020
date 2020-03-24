@@ -3,6 +3,11 @@
 #' @param cmat A matrix containing the fish counts. Note: columns represent transects and rows represent sets within transects.
 #' @param B The number of bootstrap iterations.
 #' @return Returns a list where $CPUE_B is the ordinary bootstrapped sampling distribution and $CPUE_Bc is the bias corrected sampling distribution. 
+#' @examples 
+#' ct_mat <- get.ct.mat("S:/Jordy/louiseOP2020/Data/CPUE.xls", "CPUEL")
+#' ct_mat <- ct_mat[,-11]
+#' CPUE.boot(ct_mat)
+#' @export
 
 CPUE.boot <- function(cmat, B=1000) {
   n <- ncol(cmat)

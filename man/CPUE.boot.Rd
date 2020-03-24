@@ -17,3 +17,8 @@ Returns a list where $CPUE_B is the ordinary bootstrapped sampling distribution 
 \description{
 For the Rao two stage bootstrap
 }
+\examples{
+ct_mat <- get.ct.mat("S:/Jordy/louiseOP2020/Data/CPUE.xls", "CPUEL")
+ct_mat <- ct_mat[,-11]
+CPUE.boot(ct_mat)
+}

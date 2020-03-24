@@ -8,3 +8,10 @@ Maintainer: Complain to <jordy.bernard@alaska.gov>
 Description: These computations are detailed in Appendix C of the OP. Here, get.ct.mat() reads in and prepares the count data; cpue.boot() uses two-stage bootstrap procedure (Rao) to approximate the sampling distribution for \bar{CPUE}; assess.accuracy() assesses the accuracy of CPUE and CPUE expanded abundance estimates; calc.power() is used for power calculations. Call help on these functions for more details. The actual computations used in the 2020 OP are provided as examples.
 License: MIT
 RoxygenNote: 7.0.2
+Imports:
+  rlist,
+  prevR,
+Suggests:
+  knitr,
+  rmarkdown
+VignetteBuilder: knitr

@@ -41,7 +41,6 @@ calc.power <- function(ct_mat, ts_mat, mu_vec, sig_vec, alpha, n_mc=100){
         samp <- CPUE.boot(c_mat)$CPUE_Bc
         pow[k] <- sum(samp > c)/length(samp)
       }
-      # To give a status bar
       r <- r+1
       print(paste(round(r/(length(sig_vec)*length(mu_vec))*100), "percent of the way there"))
       ret_mat[i,j] <- mean(pow) 
