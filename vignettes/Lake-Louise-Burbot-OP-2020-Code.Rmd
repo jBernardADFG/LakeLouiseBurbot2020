@@ -1,0 +1,71 @@
+---
+title: "Lake-Louise-Burbot-OP-2020-Code"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Lake-Louise-Burbot-OP-2020-Code}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r include=FALSE}
+library(rlist)
+library(prevR)
+library(LakeLouiseBurbotOP2020)
+```
+
+## To get the minimum sample size so that the length composition proportions are within 10 percentage points of the true values 95% of the time.
+### 128 fish should do it.
+```{r}
+length.comp.ss(0.05, 0.10) 
+```
+
+## To set the precision criterion for CPUE and abundance
+### The tables give the percentage of time that an accuracy criterion is satisfied for diffent levels of true abundance (rows) and between transect log scale standard deviation (columns). Note: abundance was roughly 5000 fish and the between transect log scale standard deviation was 0.34 in 2005. With 492 sets, use "estimate mean CPUE within 30% of the asymptotic value 90% of the time" for objective 2; use "estimate abundance within 40% of the true value 90% of the time" for objective 3. 
+```{r}
+load("S:/Jordy/louiseOP2020/Data/lakelines.Rdata") # Load Lake Louise lakelines
+n_max <- 492
+seed <- set.seed(666)
+ts_mat <- pick.coords(lakelines, n_max, seed)$ts_mat
+N_vec <- seq(1000, 10000, by=1000) 
+sig_vec <- seq(.1, 1, by=.1)
+q_bar <- 0.6478999
+sd_q <- 0.07966257
+A <- 6519
+acc_lev <- c(0.3, 0.3)
+# 30 percent accuracy
+assess.accuracy(ts_mat, N_vec, sig_vec, q_bar, sd_q, acc_lev, A)
+acc_lev <- c(0.4, 0.4)
+# 40 percent accuracy
+assess.accuracy(ts_mat, N_vec, sig_vec, q_bar, sd_q, acc_lev, A)
+acc_lev <- c(0.5, 0.5)
+# 50 percent accuracy
+print("50 percent accuracy")
+assess.accuracy(ts_mat, N_vec, sig_vec, q_bar, sd_q, acc_lev, A)
+```
+
+
+
+## To get power calculations
+### The table gives the power of concluding that mean CPUE has increased at the $\alpha=0.10$ significance level for different levels of 2020 mean CPUE (rows) and between transect log scale standard deviation (columns). The 2020 true mean CPUE will need to be ~0.65, to detect an increase 80 percent of the time. 
+```{r}
+set.seed(666)
+ct_mat <- get.ct.mat("S:/Jordy/louiseOP2020/Data/CPUE.xls", "CPUEL")
+ct_mat <- ct_mat[,-11]
+mu_vec <- seq(0.1, 1, by=.1)
+sig_vec <- c(0.05, 0.35, 0.85)
+alpha <- 0.10
+calc.power(ct_mat, ts_mat, mu_vec, sig_vec, alpha)
+```
+
+
+## To generate a map of the sampling design and get transect/set coordinate information 
+```{r fig2, fig.height = 3, fig.width = 3, fig.align = "center"}
+trans_set_info <- pick.coords(lakelines, n_max, seed, quiet=F)
+df <- data.frame(nsets=trans_set_info$table)
+names(df) <- c("lon", "n_sets")
+df
+coords <- trans_set_info$set_coords
+names(coords) <- c("lon", "lat")
+head(coords)
+```
+

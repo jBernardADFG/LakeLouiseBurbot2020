@@ -4,7 +4,7 @@
 \alias{pick.coords}
 \title{Function to get the coordinate locations of sets for the 2020 study}
 \usage{
-pick.coords(lakelines, n_sets, seed = 123)
+pick.coords(lakelines, n_sets, seed = 123, quiet = T)
 }
 \arguments{
 \item{lakelines}{SpatialPolygons object representing the sampling area}
@@ -21,7 +21,6 @@ Function to get the coordinate locations of sets for the 2020 study
 }
 \examples{
 load("S:/Jordy/louiseOP2020/Data/lakelines.Rdata") # Load Lake Louise lakelines
-nmax <- 491
-seed <- set.seed(123)
-pick.coords(lakelines, n_max, seed)
+n_max <- 491
+pick.coords(lakelines, n_max, quiet=F)
 }

@@ -6,6 +6,11 @@
 \usage{
 \method{length}{comp.ss}(alpha, dist)
 }
+\arguments{
+\item{alpha}{the significance level}
+
+\item{dist}{the desireed level of precision}
+}
 \value{
 returns the minimum sample size to achieve the desired level of precision at the specified significance level
 }

@@ -10,13 +10,15 @@
 #' @param n_mc The number of times to run the Monte Carlo simulation
 #' @return Returns a matrix giving the percentage of the time that the estimate is within acc_lev percent of the true value. The rows of the matrix coorespond to the entries in N_vec while the columns coorespond to entries in sig_vec.
 #' @examples 
-#' load("S:/Jordy/louiseOP2020/Data/lakelines.Rdata") # loading ts_mat
-#' N <- c(1000, 5000, 10000) 
-#' sig_vec <- seq(0.1, 1, by=.1)
+#' load("S:/Jordy/louiseOP2020/Data/lakelines.Rdata") # Load Lake Louise lakelines
+#' n_max <- 492
+#' ts_mat <- pick.coords(lakelines, n_max)$ts_mat
+#' N_vec <- seq(1000, 10000, by=1000) 
+#' sig_vec <- seq(.1, 1, by=.1)
 #' q_bar <- 0.6478999
 #' sd_q <- 0.07966257
-#' acc_lev <- c(0.3, 0.3)
 #' A <- 6519
+#' acc_lev <- c(0.3, 0.3)
 #' assess.accuracy(ts_mat, N_vec, sig_vec, q_bar, sd_q, acc_lev, A)
 #' @export
 
@@ -58,9 +60,9 @@ assess.accuracy <- function(ts_mat, N_vec, sig_vec, q_bar, sd_q, acc_lev, A, n_m
     }
   }
   rownames(ret_mat_CPUE) <- as.character(N_vec)
-  rownames(ret_mat_CPUE) <- as.character(N_vec)
+  rownames(ret_mat_N) <- as.character(N_vec)
   colnames(ret_mat_CPUE) <- as.character(sig_vec)
-  colnames(ret_mat_CPUE) <- as.character(sig_vec)
+  colnames(ret_mat_N) <- as.character(sig_vec)
   r_list <- list(CPUE=ret_mat_CPUE, N=ret_mat_N)
   return(r_list)
 }

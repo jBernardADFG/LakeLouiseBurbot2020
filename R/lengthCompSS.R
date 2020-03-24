@@ -1,7 +1,7 @@
 #' Function to calculate sample size requirements for length composition estimates using the methods of Thompson 1987
 #' 
-#' @alpha the significance level
-#' @dist the desireed level of precision
+#' @param alpha the significance level
+#' @param dist the desireed level of precision
 #' @return returns the minimum sample size to achieve the desired level of precision at the specified significance level
 #' @examples 
 #' length.comp.ss(0.05, 0.10) # To estimate the proportions within 10 percentage points of the actual values 95% of the time

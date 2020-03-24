@@ -30,12 +30,14 @@ Returns a matrix giving the percentage of the time that the estimate is within a
 Function to assess the accuracy criterion for CPUE and abundance
 }
 \examples{
-load("S:/Jordy/louiseOP2020/Data/lakelines.Rdata") # loading ts_mat
-N <- c(1000, 5000, 10000) 
-sig_vec <- seq(0.1, 1, by=.1)
+load("S:/Jordy/louiseOP2020/Data/lakelines.Rdata") # Load Lake Louise lakelines
+n_max <- 492
+ts_mat <- pick.coords(lakelines, n_max)$ts_mat
+N_vec <- seq(1000, 10000, by=1000) 
+sig_vec <- seq(.1, 1, by=.1)
 q_bar <- 0.6478999
 sd_q <- 0.07966257
-acc_lev <- c(0.3, 0.3)
 A <- 6519
+acc_lev <- c(0.3, 0.3)
 assess.accuracy(ts_mat, N_vec, sig_vec, q_bar, sd_q, acc_lev, A)
 }
